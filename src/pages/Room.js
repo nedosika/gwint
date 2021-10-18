@@ -8,8 +8,18 @@ const Room = () => {
 
     return (
         <div>
-            {
-                room
+            <h1>Room # {id}</h1>
+            {isFetching
+                ? <div>Loading...</div>
+                : <div>{room.player1.name}</div>
+            }
+            {isFetching
+                ?
+                    <div>Loading...</div>
+                :
+                    <div>
+                        {room?.player1?.deck?.map((card) => <img src={card.img} alt={card.title} height={200}/>)}
+                    </div>
             }
         </div>
     );

@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
+import { doc, onSnapshot } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCn4kAvi8r47hKLhIzJ5QjqmpKOom2MFNA",
@@ -11,11 +12,11 @@ const firebaseConfig = {
     appId: "1:784766108565:web:dfe49096b45814678f6c9c",
     measurementId: "G-B8WTVZ1XC0"
 };
+//
+initializeApp(firebaseConfig);
+// const auth = firebase.auth();
+export const db = getFirestore();
 
-const app = initializeApp(firebaseConfig);
-
-// Get a reference to the database service
-export const db = getFirestore(app);
-
-// export const db = firebase.initializeApp(firebaseConfig);
-// export const auth = firebase.auth();
+export const streamRoom = (id, observer) => {
+    return onSnapshot(doc(db, "rooms", id), observer);
+}
