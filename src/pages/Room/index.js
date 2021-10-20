@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 
 import useRoom from "../../hooks/useRoom";
 import {Card} from "../../layout/styles";
+import Slider from "../../conponents/Slider";
 
 const RoomPage = () => {
     const {id} = useParams();
@@ -11,27 +12,18 @@ const RoomPage = () => {
     return (
         <div>
             <h1>Room # {id}</h1>
-            <Card>
-                <div>Board</div>
-            </Card>
-            <Card>
-                {isFetching
-                    ? <div>Loading...</div>
-                    : <div>{room.player1.name}</div>
-                }
-                {
-                    isFetching
-                        ?
-                        <div>Loading...</div>
-                        :
-                        <div>
-                            {
-                                room?.player1?.deck?.map(
-                                    (card) => <input type="image" src={card.img} />)
-                            }
-                        </div>
-                }
-            </Card>
+            {
+                isFetching
+                    ?
+                    <div>Loading...</div>
+                    :
+                    <Slider>
+                        {
+                            room?.player1?.deck?.map(
+                                (card) => <input type="image" src={card.img}/>)
+                        }
+                    </Slider>
+            }
         </div>
     );
 };
