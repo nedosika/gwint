@@ -1,19 +1,20 @@
 import {useState, useEffect} from "react";
-import {db} from "../services";
+import * as FirestoreService from "../services/firestore";
 
 const useRoom = (id) => {
     const [room, setRoom] = useState();
     const [isFetching, setIsFetching] = useState(true);
 
     useEffect(() => {
-        const unsubscribe = db
-            .collection('rooms')
-            .doc(id)
-            .onSnapshot((doc) => {
-                if(doc.exists) setRoom({...doc.data(), id: doc.id});
-                else console.log('Room not found!');
-                if (isFetching) setIsFetching(false);
-            })
+            const unsubscribe = FirestoreService.streamRoom(id, (doc) => {
+                if(doc.exists)
+                    setRoom({...doc.data(), id: doc.id});
+                else
+                    console.log('Room not found!');
+
+                if (isFetching)
+                    setIsFetching(false);
+            });
         return () => {
             unsubscribe()
         }
