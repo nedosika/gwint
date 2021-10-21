@@ -20,3 +20,7 @@ export const db = getFirestore();
 export const streamRoom = (id, observer) => {
     return onSnapshot(doc(db, "rooms", id), observer);
 }
+
+export const streamDeck = (id, observer) => {
+    return onSnapshot(doc(db, "decks", id), observer);
+}

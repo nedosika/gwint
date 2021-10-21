@@ -5,7 +5,7 @@ import {Card, Container} from "./styles";
 const Slider = ({children}) => {
     return (
         <Container>
-            {children.map((Child) =>
+            {children && children.map((Child) =>
                 <Card>
                     {Child}
                 </Card>

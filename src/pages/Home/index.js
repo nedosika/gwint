@@ -7,16 +7,25 @@ import Layout from "../../layout";
 const HomePage = () => {
     const history = useHistory();
 
+    const goToGame = () => {
+        history.push('/game/GjI3wzxINkBZzdrV5mBg')
+    }
+
+    const goToLogin = () => {
+        history.push('/login')
+    }
+
+    const goToSignUp = () => {
+        history.push('/signup')
+    }
+
+
     return (
         <Layout>
             <H1>Home</H1>
-            <>
-                <Button
-                    onClick={() => history.push('/room/GjI3wzxINkBZzdrV5mBg')}
-                >
-                    Go to game room
-                </Button>
-            </>
+            <Button onClick={goToGame}>Go to Game Room</Button>
+            <Button onClick={goToLogin}>Login</Button>
+            <Button onClick={goToSignUp}>Sign Up</Button>
         </Layout>
     );
 };

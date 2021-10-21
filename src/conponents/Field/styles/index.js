@@ -10,13 +10,13 @@ export const Container = styled.div`
 export const Input = styled.input`
   ${({ error, theme }) => css`
     background-color: ${theme.colors.white};
-    border: solid 2px ${error ? 'red' : theme.colors.lightGray};
+    border: solid 1px ${error ? 'red' : theme.colors.lightGray};
     border-radius: 10px;
     color: ${theme.colors.black};
     height: 40px;
     padding: 0 15px;
     &:focus {
-      border: solid 2px ${theme.colors.blue};
+      border: solid 1px ${theme.colors.blue};
       outline: none;
     }
   `}

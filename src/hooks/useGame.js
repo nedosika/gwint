@@ -1,8 +1,8 @@
 import {useState, useEffect} from "react";
 import * as FirestoreService from "../services/firestore";
 
-const useRoom = (id) => {
-    const [room, setRoom] = useState();
+const useGame = (id) => {
+    const [game, setRoom] = useState();
     const [isFetching, setIsFetching] = useState(true);
 
     useEffect(() => {
@@ -10,7 +10,7 @@ const useRoom = (id) => {
                 if(doc.exists)
                     setRoom({...doc.data(), id: doc.id});
                 else
-                    console.log('Room not found!');
+                    console.log('Game not found!');
 
                 if (isFetching)
                     setIsFetching(false);
@@ -20,7 +20,7 @@ const useRoom = (id) => {
         }
     }, [id, isFetching]);
 
-    return {isFetching, room}
+    return {isFetchingGame: isFetching, game}
 }
 
-export default useRoom;
+export default useGame;
