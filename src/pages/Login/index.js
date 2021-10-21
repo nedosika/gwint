@@ -27,6 +27,7 @@ const LoginPage = () => {
                 type="text"
                 onChange={setEmail}
                 value={email}
+                placeholder="Enter Email here"
             />
             <Field
                 id="password"
@@ -34,6 +35,7 @@ const LoginPage = () => {
                 type="password"
                 onChange={setPassword}
                 password={password}
+                placeholder="Enter Password here"
             />
             <Button onClick={goToSignUp}>SignUp</Button>
             <Button onClick={goBack}>Back to Home</Button>
