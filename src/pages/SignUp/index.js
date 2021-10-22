@@ -13,7 +13,7 @@ const SignUpPage = () => {
     const history = useHistory();
     const [isSigningUp, setIsSigningUp] = React.useState(false);
     const [firebaseErr, setFirebaseErr] = React.useState(undefined);
-    
+
     const [password, setPassword, errPassword] = useValidation(
         (password) => password.length > 0 && password.length < 6,
         "Password must be at least 6 characters long"
@@ -24,7 +24,7 @@ const SignUpPage = () => {
         "Email is not valid"
     );
 
-    const  [confirmPassword, setConfirmPassword, errConfirmPassword] = useValidation(
+    const [confirmPassword, setConfirmPassword, errConfirmPassword] = useValidation(
         (confirmPassword) => confirmPassword.length > 0 && password !== confirmPassword,
         "Password must much!"
     )
@@ -34,14 +34,15 @@ const SignUpPage = () => {
         FirestoreService
             .signUp(email, password)
             .then((data) => {
-                setIsSigningUp(false);
                 history.push('/');
             })
             .catch((err) => {
                 setIsSigningUp(false);
                 setFirebaseErr(err.message);
-                console.log("error: " + err);
-            });
+            })
+            .finally(() => {
+                setIsSigningUp(false);
+            })
     };
 
     const goToLogin = () => {

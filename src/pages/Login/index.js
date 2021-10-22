@@ -5,10 +5,15 @@ import {Button} from "../../conponents/styles/Button";
 import {useHistory} from 'react-router-dom';
 import Field from "../../conponents/Field";
 
+import * as FirestoreService from "../../services/firestore";
+import {Error} from "../../conponents/styles/Error";
+
 const LoginPage = () => {
     const history = useHistory();
+    const [isSignInging, setSignInging] = useState(false);
+    const [firebaseErr, setFirebaseErr] = React.useState(undefined);
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
 
     const goToSignUp = () => {
         history.push('/signup');
@@ -16,6 +21,24 @@ const LoginPage = () => {
 
     const goBack = () => {
         history.push('/');
+    }
+
+    const signIn = () => {
+        setSignInging(true);
+
+        FirestoreService
+            .signIn(email, password)
+            .then((user) => {
+                console.log(user);
+                history.push('/');
+            })
+            .catch((err) => {
+                setFirebaseErr(err.message)
+                console.log(err.message)
+            })
+            .finally(() => {
+                setSignInging(false)
+            });
     }
 
     return (
@@ -37,6 +60,8 @@ const LoginPage = () => {
                 password={password}
                 placeholder="Enter Password here"
             />
+            {firebaseErr && <Error>{firebaseErr}</Error>}
+            <Button disabled={isSignInging} onClick={signIn}>Login</Button>
             <Button onClick={goToSignUp}>SignUp</Button>
             <Button onClick={goBack}>Back to Home</Button>
         </Layout>
