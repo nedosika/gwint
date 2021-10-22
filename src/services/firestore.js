@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app"
 import {
     getFirestore,
     doc,
+    setDoc,
     onSnapshot
 } from "firebase/firestore"
 import {
@@ -34,9 +35,19 @@ export const streamDeck = (id, observer) => {
     return onSnapshot(doc(db, "decks", id), observer);
 }
 
+export const streamAuth = (observer) => {
+    const auth = getAuth();
+    return onAuthStateChanged(auth, observer);
+}
+
 export const signUp = (email, password) => {
     const auth = getAuth();
     return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export const signOut = () => {
+    const auth = getAuth();
+    return auth.signOut();
 }
 
 export const signIn = (email, password) => {
@@ -44,17 +55,13 @@ export const signIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
 }
 
-export const streamAuth = (observer) => {
-    const auth = getAuth();
-    return onAuthStateChanged(auth, observer);
-}
-
 export const getCurrentUser = () => {
     const auth = getAuth();
     return auth.currentUser;
 }
 
-export const signOut = () => {
-    const auth = getAuth();
-    return auth.signOut();
+export const updateUser = (user) => {
+    console.log(user)
+    const db = getFirestore();
+    return setDoc(doc(db, 'users', user.uid), {displayName: user.email.split('@')[0]});
 }

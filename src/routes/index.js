@@ -1,5 +1,6 @@
 import React, {Suspense} from "react";
 import {Switch, Route} from "react-router-dom";
+import Profile from "../pages/Profile";
 
 const Home = React.lazy(() => import("../pages/Home"));
 const Selecting = React.lazy(() => import("../pages/Selecting"));
@@ -11,6 +12,7 @@ const Routes = () => <Switch>
     <Suspense fallback={<div>Loading...</div>}>
         <Route path="/game/:id" component={Game} />
         <Route path="/select/:id" component={Selecting} />
+        <Route path="/profile/:id" component={Profile} />
         <Route exact path="/login" component={Login}/>
         <Route exact path="/signup" component={SignUp}/>
         <Route exact path="/" component={Home}/>

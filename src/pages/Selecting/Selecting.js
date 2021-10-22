@@ -13,7 +13,6 @@ const SelectingPage = () => {
 
     return (
         <div>
-            <h1>Selecting Deck</h1>
             {
                 isFetching
                     ?

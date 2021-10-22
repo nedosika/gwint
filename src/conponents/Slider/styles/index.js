@@ -3,7 +3,6 @@ import styled  from 'styled-components'
 export const Container = styled.div`
     position: absolute;
     height: 150px;
-    bottom: 10px;
     display: flex;
 `
 
