@@ -25,43 +25,29 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-export const streamRoom = (id, observer) => {
-    const db = getFirestore();
-    return onSnapshot(doc(db, "rooms", id), observer);
-}
+const db = getFirestore();
+const auth = getAuth();
 
-export const streamDeck = (id, observer) => {
-    const db = getFirestore();
-    return onSnapshot(doc(db, "decks", id), observer);
-}
+export const streamRoom = (id, observer) =>
+    onSnapshot(doc(db, "rooms", id), observer);
 
-export const streamAuth = (observer) => {
-    const auth = getAuth();
-    return onAuthStateChanged(auth, observer);
-}
+export const streamDeck = (id, observer) =>
+    onSnapshot(doc(db, "decks", id), observer);
 
-export const signUp = (email, password) => {
-    const auth = getAuth();
-    return createUserWithEmailAndPassword(auth, email, password);
-}
+export const streamAuth = (observer) =>
+    onAuthStateChanged(auth, observer);
 
-export const signOut = () => {
-    const auth = getAuth();
-    return auth.signOut();
-}
+export const signUp = (email, password) =>
+    createUserWithEmailAndPassword(auth, email, password);
 
-export const signIn = (email, password) => {
-    const auth = getAuth();
-    return signInWithEmailAndPassword(auth, email, password);
-}
+export const signOut = () =>
+    auth.signOut();
 
-export const getCurrentUser = () => {
-    const auth = getAuth();
-    return auth.currentUser;
-}
+export const signIn = (email, password) =>
+    signInWithEmailAndPassword(auth, email, password);
 
-export const updateUser = (user) => {
-    console.log(user)
-    const db = getFirestore();
-    return setDoc(doc(db, 'users', user.uid), {displayName: user.email.split('@')[0]});
-}
+export const getCurrentUser = () =>
+    auth.currentUser;
+
+export const updateUser = (id, user) =>
+    setDoc(doc(db, 'users', id), {...user});

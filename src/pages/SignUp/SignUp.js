@@ -38,8 +38,14 @@ const SignUpPage = () => {
             .signUp(email, password)
             .then((response) => {
                 if (!response) throw new Error('Something went wrong!')
+
+                const {user} = response;
+
                 return FirestoreService
-                    .updateUser(response.user);
+                    .updateUser(
+                        user.uid,
+                        {displayName: user.email.split('@')[0]}
+                    );
             })
             .then(() => {
                 history.push('/');

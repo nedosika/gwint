@@ -29,12 +29,10 @@ const LoginPage = () => {
         FirestoreService
             .signIn(email, password)
             .then((user) => {
-                console.log(user);
                 history.push('/');
             })
             .catch((err) => {
                 setFirebaseErr(err.message)
-                console.log(err.message)
             })
             .finally(() => {
                 setSignInging(false)
