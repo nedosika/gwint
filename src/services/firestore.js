@@ -1,6 +1,15 @@
 import { initializeApp } from "firebase/app"
-import { getFirestore } from "firebase/firestore"
-import { doc, onSnapshot } from "firebase/firestore";
+import {
+    getFirestore,
+    doc,
+    onSnapshot
+} from "firebase/firestore"
+import {
+    getAuth,
+    onAuthStateChanged,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
+} from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCn4kAvi8r47hKLhIzJ5QjqmpKOom2MFNA",
@@ -12,15 +21,49 @@ const firebaseConfig = {
     appId: "1:784766108565:web:dfe49096b45814678f6c9c",
     measurementId: "G-B8WTVZ1XC0"
 };
-//
+
 initializeApp(firebaseConfig);
-// const auth = firebase.auth();
-export const db = getFirestore();
 
 export const streamRoom = (id, observer) => {
+    const db = getFirestore();
     return onSnapshot(doc(db, "rooms", id), observer);
 }
 
 export const streamDeck = (id, observer) => {
+    const db = getFirestore();
     return onSnapshot(doc(db, "decks", id), observer);
+}
+
+export const signUp = (email, password) => {
+    const auth = getAuth();
+    return createUserWithEmailAndPassword(auth, email, password);
+}
+
+export const signIn = (email, password) => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
+}
+
+export const streamAuth = (observer) => {
+    const auth = getAuth();
+    return onAuthStateChanged(auth, observer);
+}
+
+export const getCurrentUser = () => {
+    const auth = getAuth();
+    return auth.currentUser;
+}
+
+export const signOut = () => {
+    const auth = getAuth();
+    return auth.signOut();
 }

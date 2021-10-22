@@ -5,14 +5,17 @@ import Routes from "./routes";
 
 import {GlobalStyles, theme} from './styles';
 import {ThemeProvider} from "styled-components";
+import {CurrentUserProvider} from "./hooks/useCurrentUser";
 
 ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
             <GlobalStyles/>
-            <BrowserRouter>
-                <Routes/>
-            </BrowserRouter>
+            <CurrentUserProvider>
+                <BrowserRouter>
+                    <Routes/>
+                </BrowserRouter>
+            </CurrentUserProvider>/
         </ThemeProvider>
     </React.StrictMode>,
     document.getElementById('root')
