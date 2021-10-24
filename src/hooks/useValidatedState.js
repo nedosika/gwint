@@ -1,17 +1,14 @@
 import {useState, useEffect} from "react";
 
-const useValidation = (fn, errMsg) => {
+const useValidatedState = (fn) => {
     const [field, setField] = useState('');
     const [err, setErr] = useState('');
 
     useEffect(() => {
-        if(fn(field))
-            setErr(errMsg);
-        else
-            setErr(undefined);
+        setErr(fn(field));
     }, [field]);
 
     return [field, setField, err]
 }
 
-export default useValidation;
+export default useValidatedState;

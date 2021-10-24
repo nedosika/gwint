@@ -1,8 +1,6 @@
 import React from 'react';
-import {H1} from '../../conponents/styles/H1';
 import {Button} from '../../conponents/styles/Button';
 import {useHistory} from 'react-router-dom';
-import Layout from "../../layout";
 import {useCurrentUser} from "../../hooks/useCurrentUser";
 import Logout from "../../conponents/Logout/Logout";
 import {Card} from "../../conponents/Card";
@@ -10,7 +8,7 @@ import {Content} from "../../conponents/Content";
 import {Title} from "../../conponents/Title";
 
 const HomePage = () => {
-    const [isCreatingRoom, setIsCreatingRoom] = React.useState(false);
+    const [isCreatingGame, setIsCreatingGame] = React.useState(false);
     const history = useHistory();
     const user = useCurrentUser();
 
@@ -26,8 +24,8 @@ const HomePage = () => {
         history.push('/signup')
     }
 
-    const handleCreateRoom = () => {
-
+    const handleCreateGame = () => {
+        history.push('/create');
     }
 
     const goToProfile = () => {
@@ -41,8 +39,8 @@ const HomePage = () => {
                 <Button onClick={goToGame}>Go to Game Room</Button>
                 {user ? (
                     <>
-                        <Button disabled={isCreatingRoom} onClick={handleCreateRoom}>
-                            Creat Room
+                        <Button disabled={isCreatingGame} onClick={handleCreateGame}>
+                            Create Game
                         </Button>
                         <Button onClick={goToProfile}>Profile</Button>
                         <Logout/>

@@ -5,7 +5,7 @@ import {Button} from "../../conponents/styles/Button";
 import {useHistory} from 'react-router-dom';
 import Field from "../../conponents/Field";
 
-import * as FirestoreService from "../../services/firestore";
+import FirestoreService from "../../services/Firestore";
 import {Error} from "../../conponents/styles/Error";
 
 const LoginPage = () => {
@@ -28,7 +28,7 @@ const LoginPage = () => {
 
         FirestoreService
             .signIn(email, password)
-            .then((user) => {
+            .then(() => {
                 history.push('/');
             })
             .catch((err) => {

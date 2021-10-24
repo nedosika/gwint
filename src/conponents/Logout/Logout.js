@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import * as FirestoreService from "../../services/firestore";
+import * as FirestoreService from "../../services/Firestore/Firestore";
 
 import {Button, Error} from '../../conponents'
 

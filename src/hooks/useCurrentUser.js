@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as FirestoreService from "../services/firestore";
+import FirestoreService from "../services/Firestore";
 
 const CurrentUserContext = React.createContext({});
 
@@ -8,11 +8,12 @@ export const CurrentUserProvider = ({children}) => {
     const [user, setUser] = React.useState(undefined);
 
     React.useEffect(() => {
-        const unsubscribe = FirestoreService.streamAuth((user) => {
-            if (user?.uid)
-                return setUser({...user});
-            return setUser(undefined)
-        });
+        const unsubscribe = FirestoreService.streamAuth(
+            (user) => {
+                if (user?.uid)
+                    return setUser({...user});
+                return setUser(undefined)
+            });
         return () => {
             unsubscribe();
         }

@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import * as FirestoreService from "../services/firestore";
+import FirestoreService from "../services/Firestore";
 
 const useGame = (id) => {
     const [game, setRoom] = useState();

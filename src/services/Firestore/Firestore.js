@@ -1,10 +1,13 @@
-import { initializeApp } from "firebase/app"
+import {initializeApp} from "firebase/app";
 import {
     getFirestore,
     doc,
+    getDoc,
     setDoc,
+    addDoc,
+    collection,
     onSnapshot
-} from "firebase/firestore"
+} from "firebase/firestore";
 import {
     getAuth,
     onAuthStateChanged,
@@ -37,17 +40,42 @@ export const streamDeck = (id, observer) =>
 export const streamAuth = (observer) =>
     onAuthStateChanged(auth, observer);
 
-export const signUp = (email, password) =>
-    createUserWithEmailAndPassword(auth, email, password);
+export const signIn = (email, password) =>
+    signInWithEmailAndPassword(auth, email, password);
 
 export const signOut = () =>
     auth.signOut();
 
-export const signIn = (email, password) =>
-    signInWithEmailAndPassword(auth, email, password);
+export const signUp = (email, password) =>
+    createUserWithEmailAndPassword(auth, email, password);
 
 export const getCurrentUser = () =>
     auth.currentUser;
 
 export const updateUser = (id, user) =>
     setDoc(doc(db, 'users', id), {...user});
+
+export const getUserInfo = (id) =>
+    getDoc(doc(db, "users", id))
+
+export const createGame = (game) =>
+    addDoc(collection(db, "rooms"), {...game});
+
+export const updateGame = (id, game) =>
+    setDoc(doc(db, 'rooms', id), {...game})
+
+const FirestoreService = {
+    streamRoom,
+    streamDeck,
+    streamAuth,
+    signIn,
+    signOut,
+    signUp,
+    getCurrentUser,
+    getUserInfo,
+    updateUser,
+    createGame,
+    updateGame
+}
+
+export default FirestoreService;

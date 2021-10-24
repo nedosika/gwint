@@ -3,7 +3,7 @@ import {useHistory, useParams} from "react-router-dom";
 import useDeck from "../../hooks/useDeck";
 import Slider from "../../conponents/Slider";
 
-const Profile = () => {
+const ProfilePage = () => {
     //const {id} = useParams();
 
     const history = useHistory();
@@ -35,4 +35,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default ProfilePage;
