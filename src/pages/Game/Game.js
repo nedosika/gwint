@@ -3,31 +3,28 @@ import {useParams} from "react-router-dom";
 
 import useGame from "../../hooks/useGame";
 import PlayerDeck from "../../conponents/PlayerDeck";
+import {H1} from "../../conponents/styles/H1";
 
 const GamePage = () => {
     const {id} = useParams();
-    const {isFetchingGame, game} = useGame(id);
+    const [isFetching, game] = useGame(id);
 
-    console.log("sss" + game)
+    if (isFetching)
+        return <H1>Fetching Game...</H1>;
+    if (!game?.players)
+        return <H1>No Game Found</H1>;
 
     return (
         <div>
             <h1>Room # {id}</h1>
             <h1>P1</h1>
             {
-                isFetchingGame
-                    ?
-                    <div>Loading...</div>
-                    :
-                    <PlayerDeck deck={game.players.P1.deck}/>
+                <PlayerDeck deck={game.players.P1.deck}/>
             }
             <h2>P2</h2>
             {
-                isFetchingGame
-                    ?
-                    <div>Loading...</div>
-                    :
-                    <PlayerDeck deck={game.players.P2.deck}/>
+
+                <PlayerDeck deck={game.players.P2.deck}/>
             }
         </div>
     );

@@ -13,7 +13,7 @@ const HomePage = () => {
     const user = useCurrentUser();
 
     const goToGame = () => {
-        history.push('/game/GjI3wzxINkBZzdrV5mBg')
+        history.push('/game')
     }
 
     const goToLogin = () => {
@@ -36,7 +36,7 @@ const HomePage = () => {
         <Content>
             <Title>Home</Title>
             <Card>
-                <Button onClick={goToGame}>Go to Game Room</Button>
+                <Button onClick={goToGame}>Go to Game</Button>
                 {user ? (
                     <>
                         <Button disabled={isCreatingGame} onClick={handleCreateGame}>

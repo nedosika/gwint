@@ -7,11 +7,13 @@ export default class Game {
         password,
         owner
     ) {
+        console.log(owner)
         this.name = name;
         this.password = password;
+        this.owner = owner;
         this.players = {
             P1: {
-                ...new Player(
+                ... new Player(
                     owner.uid,
                     owner.name,
                     owner.deck,

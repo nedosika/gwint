@@ -31,8 +31,11 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const auth = getAuth();
 
-export const streamRoom = (id, observer) =>
+export const streamGame = (id, observer) =>
     onSnapshot(doc(db, "rooms", id), observer);
+
+export const streamGames = (observer) =>
+    onSnapshot(collection(db, "rooms"), observer);
 
 export const streamDeck = (id, observer) =>
     onSnapshot(doc(db, "decks", id), observer);
@@ -65,7 +68,8 @@ export const updateGame = (id, game) =>
     setDoc(doc(db, 'rooms', id), {...game})
 
 const FirestoreService = {
-    streamRoom,
+    streamGame,
+    streamGames,
     streamDeck,
     streamAuth,
     signIn,

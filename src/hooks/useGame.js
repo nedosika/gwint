@@ -2,13 +2,14 @@ import {useState, useEffect} from "react";
 import FirestoreService from "../services/Firestore";
 
 const useGame = (id) => {
-    const [game, setRoom] = useState();
+    const [game, setGame] = useState(undefined);
     const [isFetching, setIsFetching] = useState(true);
 
     useEffect(() => {
-            const unsubscribe = FirestoreService.streamRoom(id, (doc) => {
-                if(doc.exists)
-                    setRoom({...doc.data(), id: doc.id});
+        const unsubscribe = FirestoreService
+            .streamGame(id, (doc) => {
+                if (doc.exists)
+                    setGame({...doc.data(), id: doc.id});
                 else
                     console.log('Game not found!');
 
@@ -20,7 +21,7 @@ const useGame = (id) => {
         }
     }, [id, isFetching]);
 
-    return {isFetchingGame: isFetching, game}
+    return [isFetching, game]
 }
 
 export default useGame;

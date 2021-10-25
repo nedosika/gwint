@@ -15,7 +15,7 @@ ReactDOM.render(
                 <BrowserRouter>
                     <Routes/>
                 </BrowserRouter>
-            </CurrentUserProvider>/
+            </CurrentUserProvider>
         </ThemeProvider>
     </React.StrictMode>,
     document.getElementById('root')

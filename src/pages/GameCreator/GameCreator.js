@@ -34,16 +34,12 @@ const GameCreatorPage = () => {
 
         FirestoreService
             .getUserInfo(user.uid)
-            .then((response) => {
-                console.log(response.data())
-
-                return FirestoreService
-                    .createGame(new Game(
-                        name,
-                        password,
-                        response.data()
-                    ))
-            })
+            .then((response) => FirestoreService
+                .createGame(new Game(
+                    name,
+                    password,
+                    response.data()
+                )))
             .then((response) => {
                 if (!response?.id)
                     throw new Error('Something went wrong!');
